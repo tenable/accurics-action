@@ -81,14 +81,14 @@ These config file settings can be set globally, but if one is specified, all mus
 ```yaml
     steps:
       - name: Accurics
-	uses: actions/accurics@v1.0
-	env:
+        uses: actions/accurics@v1.0
+        env:
           # Required by Terraform
-	  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-	  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-	with:
-	  plan-args: '-var myvar1=val1 -var myvar2=val2'
-	  fail-on-violations: false
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        with:
+          plan-args: '-var myvar1=val1 -var myvar2=val2'
+          fail-on-violations: false
       - name: Display statistics
         run: '
             echo "Env Name    : ${{ steps.accurics.outputs.env-name }}";
