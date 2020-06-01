@@ -17,7 +17,7 @@ and plan-args settings (see the example below)
 ```yaml
     steps:
       - name: Accurics
-        uses: actions/accurics@1
+        uses: actions/accurics@v1.0
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -59,5 +59,3 @@ and plan-args settings (see the example below)
 | summary | $summary |
 | has-errors | $has_errors |
 
-## Notes
-- When 
