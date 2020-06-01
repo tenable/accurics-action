@@ -1,0 +1,64 @@
+# Action definition for the GitHub Accurics Action
+name: 'Accurics'
+description: 'An action that performs a scan using the Accurics platform'
+inputs:
+  debug-mode:
+    required: false
+    default: false
+  terraform-version:
+    description: 'The Terraform version used to process the files in this repository (ex: 0.12.26). (default=latest)'
+    required: false
+    default: 'latest'
+  directories:
+    description: 'A list of directories to scan within this repository separated by a space. (default=current directory)'
+    required: false
+    default: '.'
+  plan-args:
+    description: 'Terraform plan arguments'
+    required: true
+    default: ''
+  env-id:
+    description: 'Environment ID for Accurics to scan. Also requires the Application ID to be set.'
+    required: false
+    default: ''
+  app-id:
+    description: 'Accurics CLI Application Token ID. Also requires the Environment ID to be set.'
+    required: false
+    default: ''
+  app-url:
+    description: 'Accurics Application URL'
+    required: false
+    default: 'https://app.accurics.com'
+  fail-on-violations:
+    description: 'Allows Accurics to fail the build when violations are found (default=true)'
+    required: false
+    default: true
+  fail-on-all-errors:
+    description: 'Allows Accurics to fail the build when any errors are encountered (default=true)'
+    required: false
+    default: true
+outputs:
+  env-name:
+    echo "::set-output name=env-id::$env_name"
+  env-id:
+    echo "::set-output name=env-id::$env_id"
+  num-violations:
+    echo "::set-output name=num-violations::$num_violations"
+  summary:
+    echo "::set-output name=summary::$summary"
+  has-errors:
+    echo "::set-output name=has-errors::$has_errors"
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.debug-mode }}
+    - ${{ inputs.terraform-version}}
+    - ${{ inputs.directories }}
+    - ${{ inputs.plan-args }}
+    - ${{ inputs.env-id }}
+    - ${{ inputs.app-id }}
+    - ${{ inputs.app-url }}
+    - ${{ inputs.fail-on-violations }}
+    - ${{ inputs.fail-on-all-errors }}
+
