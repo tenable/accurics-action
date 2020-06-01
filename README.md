@@ -49,7 +49,9 @@ These config file settings can be set globally, but if one is specified, all mus
 
 ## Examples
 
-### This example configures an Accurics Scan with a custom Terraform version and variables. It will also fail the build on any violations or errors found.
+### Example 1:
+This example configures an Accurics Scan with a custom Terraform version and variables. It will also fail the build on any violations or errors found.
+
 ```yaml
     steps:
       - name: Accurics
@@ -63,7 +65,8 @@ These config file settings can be set globally, but if one is specified, all mus
           plan-args: '-var myvar1=val1 -var myvar2=val2'
 ```
 
-### Configure an Accurics Scan using the latest Terraform version, custom variables, and instructs the action not to fail when any violations are found. This is helpful when first introducing the action into a new codebase and working through a large number of violations. Once the number of violations is manageable, the option can be set back to true (or removed).
+### Example 2:
+This example configures an Accurics Scan using the latest Terraform version, custom variables, and instructs the action not to fail when any violations are found. This is helpful when first introducing the action into a new codebase and working through a large number of violations. Once the number of violations is manageable, the option can be set back to true (or removed).
 ```yaml
     steps:
       - name: Accurics
@@ -77,7 +80,8 @@ These config file settings can be set globally, but if one is specified, all mus
           fail-on-violations: false
 ```
 
-### This is the same configuration as before, but it now includes an extra build step to display the output scan status.
+### Example 3:
+This is the same configuration as before, but it now includes an extra build step to display the output scan status.
 ```yaml
     steps:
       - name: Accurics
