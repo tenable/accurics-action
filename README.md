@@ -1,21 +1,34 @@
 # Accurics GitHub Action
 
 ## Description
-The Accurics GitHub action runs an Accurics CLI scan against the IaC (Infrastructure-as-Code) files found within the applied repository.
+The Accurics GitHub action runs an Accurics scan against the IaC (Infrastructure-as-Code) files found within the applied repository.
 This action can be used to fail a pipeline build when violations or errors are found.
-The CLI results can be viewed in the pipeline results or in the Accurics Console itself at https://www.accurics.com
+The scan results can be viewed in the pipeline results or in the Accurics Console itself at https://app.accurics.com
 
 See examples below.
 
 ## Setup
 
-- Download the config file settings from the Accurics Console and place them into a file called "config" under the repository.
-- If not using the latest Terraform version, specify the terraform-version within the build step.
-- If variables are used, add them in the plan-args setting, along with any other command line parameters that should be passed when running "terraform plan" (see the example below)
+- Create GitHub secrets to store the Environment ID and Application Token. Open your Repository Settings->Secrets tab->New Secret. Create two secrets called "ACCURICS_APP_ID" and "ACCURICS_ENV_ID" filled with the "app" and "env" values copied from the config file downloaded from the Accurics UI environment tab.
+- Add "app-id" and "env-id" parameters referencing the respective GitHub secrets. See the examples below for more info.
+- Add a "repo" parameter that contains the remote repo location.
+- If not using the latest Terraform version, specify the "terraform-version" parameter within the build step.
+- If variables are used, add them in the "plan-args" parameter, along with any other command line parameters that should be passed when running "terraform plan" (see the example below)
+
+## Cost
+
+The Accurics GitHub action runs as a Linux container, which means it accumulates minutes while running at the same rate Linux containers are charged by GitHub. Please refer to the GitHub action billing page for more detailed information.
 
 ## Input Settings
 
-### All Settings are Optional
+### These settings are required
+| Setting | Description |
+| -------------------- | ----------------------------------------------------------- |
+| app-id | The application token ID |
+| env-id | The environment ID |
+| repo   | The repository location URL |
+
+### All of the following settings are optional
 
 | Setting | Description | Default |
 | -------------------- | ----------------------------------------------------------- | --------- |
@@ -26,25 +39,23 @@ See examples below.
 | fail-on-all-errors | Allows the Accurics Action to fail the build when any errors are encountered | true |
 
 ### Notes
-- When specifying a list of directories, a config file must be checked into the repo at that same location.
 - Variable values within the plan-args setting should be stripped of double-quote (") characters
-
-### The following settings can be used instead of checking in a config file
-These config file settings can be set globally, but if one is specified, all must be specified.
-| Setting | Description | Default |
-| ------------------ | ----------------------------------------------------------- | --------- |
-| env-id | Environment ID for Accurics to scan | | 
-| app-id | Accurics CLI Application Token ID | |
-
 
 ## Outputs
 
 | Name | Variable Name  |
 | ---------------- | --------------- |
-| env-name | $env_name |
-| env-id | $env_id |
-| num-violations | $num_violations |
-| summary | $summary |
+| Environment Name | $env_name |
+| Violation Count | $num_violations |
+| Resource Count | $num_resources |
+| High-Severity Violations | $high |
+| Medium-Severity Violations | $medium |
+| Low-Severity Violations | $low |
+| Native Resources | $native |
+| Inherited Resources | $inherited |
+| Drift | $drift |
+| IaC Drift | $iacdrift |
+| Cloud Drift | $clouddrift |
 | has-errors | $has_errors |
 
 ## Examples
@@ -54,13 +65,20 @@ This example configures an Accurics Scan with a custom Terraform version and var
 
 ```yaml
     steps:
+      # Required to checkout the files in the current repository
+      - name: Checkout
+        uses: actions/checkout@v2
       - name: Accurics
-        uses: actions/accurics@v1.0
+        uses: accurics/accurics-action@v1.1
         env: 
           # Required by Terraform
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         with:
+          # Required by Accurics
+          app-id: ${{ secrets.ACCURICS_APP_ID }}
+          env-id: ${{ secrets.ACCURICS_ENV_ID }}
+          # Optional args
           terraform-version: 0.12.24
           plan-args: '-var myvar1=val1 -var myvar2=val2'
 ```
@@ -69,13 +87,20 @@ This example configures an Accurics Scan with a custom Terraform version and var
 This example configures an Accurics Scan using the latest Terraform version, custom variables, and instructs the action not to fail when any violations are found. This is helpful when first introducing the action into a new codebase and working through a large number of violations. Once the number of violations is manageable, the option can be set back to true (or removed).
 ```yaml
     steps:
+      - name: Checkout
+        uses: actions/checkout@v2
       - name: Accurics
-        uses: actions/accurics@v1.0
+        uses: accurics/accurics-action@v1.1
         env:
           # Required by Terraform
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         with:
+          # Required by Accurics
+          app-id: ${{ secrets.ACCURICS_APP_ID }}
+          env-id: ${{ secrets.ACCURICS_ENV_ID }}
+          repo: "https://bitbucket.org/myrepo/reponame.git"
+          # Optional args
           plan-args: '-var myvar1=val1 -var myvar2=val2'
           fail-on-violations: false
 ```
@@ -84,22 +109,41 @@ This example configures an Accurics Scan using the latest Terraform version, cus
 This is the same configuration as before, but it now includes an extra build step to display the output scan status.
 ```yaml
     steps:
+      - name: Checkout
+        uses: actions/checkout@v2
       - name: Accurics
-        uses: actions/accurics@v1.0
+        uses: accurics/accurics-action@v1.1
         env:
           # Required by Terraform
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         with:
+          # Required by Accurics
+          app-id: ${{ secrets.ACCURICS_APP_ID }}
+          env-id: ${{ secrets.ACCURICS_ENV_ID }}
+          repo: "https://bitbucket.org/myrepo/reponame.git"
+          # Optional args
           plan-args: '-var myvar1=val1 -var myvar2=val2'
           fail-on-violations: false
       - name: Display statistics
         run: '
-            echo "Env Name    : ${{ steps.accurics.outputs.env-name }}";
-            echo "Env ID      : ${{ steps.accurics.outputs.env-id }}";
-            echo "Scan ID     : ${{ steps.accurics.outputs.scan-id }}";
-            echo "Violations  : ${{ steps.accurics.outputs.num-violations }}";
-            echo "Summary     : ${{ steps.accurics.outputs.summary }}";
+            echo ""
+            echo "Environment Name           : ${{ steps.accurics.outputs.env-name }}";
+            echo "Repository                 : ${{ steps.accurics.outputs.repo }}";
+            echo "Violation Count            : ${{ steps.accurics.outputs.num-violations }}";
+            echo "Resource Count             : ${{ steps.accurics.outputs.num-resources }}";
+            echo ""
+            echo "Native Resources           : ${{ steps.accurics.outputs.native }}";
+            echo "Inherited Resources        : ${{ steps.accurics.outputs.inherited }}";
+            echo ""
+            echo "High-Severity Violations   : ${{ steps.accurics.outputs.high }}";
+            echo "Medium-Severity Violations : ${{ steps.accurics.outputs.medium }}";
+            echo "Low-Severity Violations    : ${{ steps.accurics.outputs.low }}";
+            echo ""
+            echo "Drift                      : ${{ steps.accurics.outputs.drift }}";
+            echo "IaC Drift                  : ${{ steps.accurics.outputs.iacdrift }}";
+            echo "Cloud Drift                : ${{ steps.accurics.outputs.clouddrift }}";
+            echo ""
           '
 ```
 
