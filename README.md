@@ -54,8 +54,11 @@ This example configures an Accurics Scan with a custom Terraform version and var
 
 ```yaml
     steps:
+      # Required to checkout the files in the current repository
+      - name: Checkout
+        uses: actions/checkout@v2
       - name: Accurics
-        uses: actions/accurics@v1.0
+        uses: accurics-dev/accurics-action@v1.0
         env: 
           # Required by Terraform
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
@@ -69,8 +72,10 @@ This example configures an Accurics Scan with a custom Terraform version and var
 This example configures an Accurics Scan using the latest Terraform version, custom variables, and instructs the action not to fail when any violations are found. This is helpful when first introducing the action into a new codebase and working through a large number of violations. Once the number of violations is manageable, the option can be set back to true (or removed).
 ```yaml
     steps:
+      - name: Checkout
+        uses: actions/checkout@v2
       - name: Accurics
-        uses: actions/accurics@v1.0
+        uses: accurics-dev/accurics-action@v1.0
         env:
           # Required by Terraform
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
@@ -84,8 +89,10 @@ This example configures an Accurics Scan using the latest Terraform version, cus
 This is the same configuration as before, but it now includes an extra build step to display the output scan status.
 ```yaml
     steps:
+      - name: Checkout
+        uses: actions/checkout@v2
       - name: Accurics
-        uses: actions/accurics@v1.0
+        uses: accurics-dev/accurics-action@v1.0
         env:
           # Required by Terraform
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
