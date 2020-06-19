@@ -9,13 +9,24 @@ See examples below.
 
 ## Setup
 
-- Download the config file settings from the Accurics Console and place them into a file called "config" under the repository.
+- Create GitHub secrets to store the Environment ID and Application Token. Open your Repository Settings->Secrets tab->New Secret. Create two secrets called "ACCURICS_CLI_APP_ID" and "ACCURICS_CLI_ENV_ID" filled with values copied from the Accurics UI in the Environment details page.
+- Add corresponding entries called "env-id" and "app-id" referring to the newly-created GitHub secrets. See examples below for more info.
 - If not using the latest Terraform version, specify the terraform-version within the build step.
 - If variables are used, add them in the plan-args setting, along with any other command line parameters that should be passed when running "terraform plan" (see the example below)
 
+## Cost
+
+The Accurics GitHub action runs as a Linux container, which means it accumulates minutes while running at the same rate Linux containers are charged by GitHub. Please refer to the GitHub action billing page for more detailed information.
+
 ## Input Settings
 
-### All Settings are Optional
+### These settings are required
+| Setting | Description | Default |
+| -------------------- | ----------------------------------------------------------- | --------- |
+| app-id | ${ACCURICS_CLI_APP_ID} |
+| env-id | ${ACCURICS_CLI_ENV_ID} |
+
+### All of the following settings are optional
 
 | Setting | Description | Default |
 | -------------------- | ----------------------------------------------------------- | --------- |
@@ -26,16 +37,7 @@ See examples below.
 | fail-on-all-errors | Allows the Accurics Action to fail the build when any errors are encountered | true |
 
 ### Notes
-- When specifying a list of directories, a config file must be checked into the repo at that same location.
 - Variable values within the plan-args setting should be stripped of double-quote (") characters
-
-### The following settings can be used instead of checking in a config file
-These config file settings can be set globally, but if one is specified, all must be specified.
-| Setting | Description | Default |
-| ------------------ | ----------------------------------------------------------- | --------- |
-| env-id | Environment ID for Accurics to scan | | 
-| app-id | Accurics CLI Application Token ID | |
-
 
 ## Outputs
 
@@ -64,6 +66,10 @@ This example configures an Accurics Scan with a custom Terraform version and var
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         with:
+          # Required by Accurics
+          app-id: ${{ secrets.ACCURICS_CLI_APP_ID }}
+          env-id: ${{ secrets.ACCURICS_CLI_ENV_ID }}
+          # Optional args
           terraform-version: 0.12.24
           plan-args: '-var myvar1=val1 -var myvar2=val2'
 ```
@@ -81,6 +87,10 @@ This example configures an Accurics Scan using the latest Terraform version, cus
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         with:
+          # Required by Accurics
+          app-id: ${{ secrets.ACCURICS_CLI_APP_ID }}
+          env-id: ${{ secrets.ACCURICS_CLI_ENV_ID }}
+          # Optional args
           plan-args: '-var myvar1=val1 -var myvar2=val2'
           fail-on-violations: false
 ```
@@ -98,6 +108,10 @@ This is the same configuration as before, but it now includes an extra build ste
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         with:
+          # Required by Accurics
+          app-id: ${{ secrets.ACCURICS_CLI_APP_ID }}
+          env-id: ${{ secrets.ACCURICS_CLI_ENV_ID }}
+          # Optional args
           plan-args: '-var myvar1=val1 -var myvar2=val2'
           fail-on-violations: false
       - name: Display statistics
