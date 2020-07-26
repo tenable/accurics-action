@@ -9,6 +9,16 @@ See examples below.
 
 ## Setup
 
+```yaml
+    steps:
+      - name: Accurics
+        uses: accurics/accurics-action@v1.0
+        id: accurics
+        with:
+          app-id: ${{ secrets.ACCURICS_APP_ID }}
+          env-id: ${{ secrets.ACCURICS_ENV_ID }}
+```
+
 - Create GitHub secrets to store the Environment ID and Application Token. Open your Repository Settings->Secrets tab->New Secret. Create two secrets called "ACCURICS_APP_ID" and "ACCURICS_ENV_ID" filled with the "app" and "env" values copied from the config file downloaded from the Accurics UI environment tab.
 - Add "app-id" and "env-id" parameters referencing the respective GitHub secrets. See the examples below for more info.
 - Add a "repo" parameter that contains the remote repo location.
@@ -69,7 +79,8 @@ This example configures an Accurics Scan with a custom Terraform version and var
       - name: Checkout
         uses: actions/checkout@v2
       - name: Accurics
-        uses: accurics-dev/accurics-action@v1.0
+        uses: accurics/accurics-action@v1.0
+        id: accurics
         env: 
           # Required by Terraform
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
@@ -90,7 +101,8 @@ This example configures an Accurics Scan using the latest Terraform version, cus
       - name: Checkout
         uses: actions/checkout@v2
       - name: Accurics
-        uses: accurics-dev/accurics-action@v1.0
+        uses: accurics/accurics-action@v1.0
+        id: accurics
         env:
           # Required by Terraform
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
@@ -112,7 +124,8 @@ This is the same configuration as before, but it now includes an extra build ste
       - name: Checkout
         uses: actions/checkout@v2
       - name: Accurics
-        uses: accurics-dev/accurics-action@v1.0
+        uses: accurics/accurics-action@v1.0
+        id: accurics
         env:
           # Required by Terraform
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
