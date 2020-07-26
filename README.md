@@ -69,7 +69,7 @@ This example configures an Accurics Scan with a custom Terraform version and var
       - name: Checkout
         uses: actions/checkout@v2
       - name: Accurics
-        uses: accurics/accurics-action@v1.1
+        uses: actions/accurics@v1.0
         env: 
           # Required by Terraform
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
@@ -90,7 +90,7 @@ This example configures an Accurics Scan using the latest Terraform version, cus
       - name: Checkout
         uses: actions/checkout@v2
       - name: Accurics
-        uses: accurics/accurics-action@v1.1
+        uses: actions/accurics@v1.0
         env:
           # Required by Terraform
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
@@ -112,7 +112,7 @@ This is the same configuration as before, but it now includes an extra build ste
       - name: Checkout
         uses: actions/checkout@v2
       - name: Accurics
-        uses: accurics/accurics-action@v1.1
+        uses: actions/accurics@v1.0
         env:
           # Required by Terraform
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
