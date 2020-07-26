@@ -1,6 +1,9 @@
 # Action definition for the GitHub Accurics Action
 name: 'Accurics'
 description: 'An action that performs a scan using the Accurics platform'
+branding:
+  color: blue
+  icon: shield
 inputs:
   debug-mode:
     required: false
