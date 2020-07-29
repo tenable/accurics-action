@@ -1,7 +1,7 @@
 # Action definition for the GitHub Accurics Action
 name: 'Accurics GitHub Action'
 author: 'accurics'
-description: 'The Accurics GitHub Action scans IaC (Infrastructure as Code) files checked into the respository to help ensure that cloud resources are secure and compliant from creation.'
+description: 'The Accurics GitHub Action scans IaC (Infrastructure as Code) to help identify vulnerabilities prior to cloud deployment.'
 branding:
   color: blue
   icon: shield
