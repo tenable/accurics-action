@@ -47,29 +47,29 @@ inputs:
     default: true
 outputs:
   env-name:
-    echo "::set-output name=env-name::$env_name"
+    description: 'Environment Name'
   num-violations:
-    echo "::set-output name=num-violations::$num_violations"
+    description: 'Number of Violations'
   num-resources:
-    echo "::set-output name=num-resources::$num_resources"
+    description: 'Number of Resources'
   high:
-    echo "::set-output name=high::$high"
+    description: 'Number of High-Severity Violations'
   medium:
-    echo "::set-output name=medium::$medium"
+    description: 'Number of Medium-Severity Violations'
   low:
-    echo "::set-output name=low::$low"
+    description: 'Number of Low-Severity Violations'
   native:
-    echo "::set-output name=native::$native"
+    description: 'Number of Violations for Native Resources'
   inherited:
-    echo "::set-output name=inherited::$inherited"
+    description: 'Number of Violations Inherited from Other Resources'
   drift:
-    echo "::set-output name=drift::$drift"
+    description: 'Total Number of Configuration drifts Found'
   iacdrift:
-    echo "::set-output name=iacdrift::$iacdrift"
+    description: 'Number of IAC-to-Cloud Configuration drifts Found'
   clouddrift:
-    echo "::set-output name=clouddrift::$clouddrift"
+    description: 'Number of Cloud-to-Cloud Configuration drifts Found'
   has-errors:
-    echo "::set-output name=has-errors::$has_errors"
+    description: 'Errors were reported'
 runs:
   using: 'docker'
   image: 'Dockerfile'
