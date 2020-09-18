@@ -1,6 +1,10 @@
 # Action definition for the GitHub Accurics Action
-name: 'Accurics'
-description: 'An action that performs a scan using the Accurics platform'
+name: 'Accurics GitHub Action'
+author: 'accurics'
+description: 'The Accurics GitHub Action scans IaC (Infrastructure as Code) to help identify vulnerabilities prior to cloud deployment.'
+branding:
+  color: blue
+  icon: shield
 inputs:
   debug-mode:
     required: false
@@ -18,14 +22,18 @@ inputs:
     required: true
     default: ''
   env-id:
-    description: 'Environment ID for Accurics to scan. Also requires the Application ID to be set.'
-    required: false
+    description: 'Environment ID for Accurics to scan'
+    required: true
     default: ''
   app-id:
-    description: 'Accurics CLI Application Token ID. Also requires the Environment ID to be set.'
-    required: false
+    description: 'Accurics CLI Application Token ID'
+    required: true
     default: ''
-  app-url:
+  repo:
+    description: 'Repository Location'
+    required: false
+    default: '__empty__'
+  url:
     description: 'Accurics Application URL'
     required: false
     default: 'https://app.accurics.com'
@@ -39,26 +47,41 @@ inputs:
     default: true
 outputs:
   env-name:
-    echo "::set-output name=env-id::$env_name"
-  env-id:
-    echo "::set-output name=env-id::$env_id"
+    description: 'Environment Name'
   num-violations:
-    echo "::set-output name=num-violations::$num_violations"
-  summary:
-    echo "::set-output name=summary::$summary"
+    description: 'Number of Violations'
+  num-resources:
+    description: 'Number of Resources'
+  high:
+    description: 'Number of High-Severity Violations'
+  medium:
+    description: 'Number of Medium-Severity Violations'
+  low:
+    description: 'Number of Low-Severity Violations'
+  native:
+    description: 'Number of Violations for Native Resources'
+  inherited:
+    description: 'Number of Violations Inherited from Other Resources'
+  drift:
+    description: 'Total Number of Configuration drifts Found'
+  iacdrift:
+    description: 'Number of IAC-to-Cloud Configuration drifts Found'
+  clouddrift:
+    description: 'Number of Cloud-to-Cloud Configuration drifts Found'
   has-errors:
-    echo "::set-output name=has-errors::$has_errors"
+    description: 'Errors were reported'
 runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
     - ${{ inputs.debug-mode }}
-    - ${{ inputs.terraform-version}}
+    - ${{ inputs.terraform-version }}
     - ${{ inputs.directories }}
     - ${{ inputs.plan-args }}
     - ${{ inputs.env-id }}
     - ${{ inputs.app-id }}
-    - ${{ inputs.app-url }}
+    - ${{ inputs.repo-name }}
+    - ${{ inputs.url }}
     - ${{ inputs.fail-on-violations }}
     - ${{ inputs.fail-on-all-errors }}
 
