@@ -14,7 +14,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Accurics Scan
-        uses: accurics/accurics-action@v1.1
+        uses: accurics/accurics-action@v1.2
         id: accurics
         env:
           # Credentials are required by Terraform. They can be specified using any method that Terraform accepts
