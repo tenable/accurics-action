@@ -1,19 +1,13 @@
-name: "Code scanning"
-
+name: "accurics"
 on:
   push:
   schedule:
   - cron: '0 0 * * 0'
-
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-
-    - name: Run npm install
-      run: npm install
-
     - name: Import Results
       uses: github/codeql-action/upload-sarif@v1
       with:
