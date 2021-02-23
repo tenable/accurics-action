@@ -29,10 +29,13 @@ process_args() {
 
 install_terraform() {
   local terraform_ver=$1
-  local url="https://releases.hashicorp.com/terraform/$terraform_ver/terraform_${terraform_ver}_linux_amd64.zip"
+  local url
+
   [ "$terraform_ver" = "latest" ] && terraform_ver=`curl -sL https://releases.hashicorp.com/terraform/index.json | jq -r '.versions[].version' | grep -v '[-].*' | sort -rV | head -n 1`
 
-  echo "Downloading Terraform: $terraform_ver"
+  url="https://releases.hashicorp.com/terraform/$terraform_ver/terraform_${terraform_ver}_linux_amd64.zip"
+
+  echo "Downloading Terraform: $terraform_ver from $url"
   curl -s -S -L -o /tmp/terraform_${terraform_ver}_linux_amd64.zip ${url}
 
   [ "$?" -ne 0 ] && echo "Error while downloading Terraform $terraform_ver" && exit 150
@@ -66,6 +69,7 @@ process_errors() {
 
 process_output() {
   num_violations=$VIOLATIONS
+  repo=$ACCURICS_REPO_NAME
   env_name=`grep envName $REPORT_NAME | head -1 | cut -d\" -f4`
   num_resources=`grep resources $REPORT_NAME | head -1 | awk '{ print $2 }' | cut -d, -f1`
   high=`grep high $REPORT_NAME | head -1 | awk '{ print $2 }' | cut -d, -f1`
@@ -79,6 +83,7 @@ process_output() {
   has_errors=`grep HasErrors $REPORT_NAME | head -1 | awk '{ print $2 }' | cut -d, -f1`
 
   echo "::set-output name=env-name::$env_name"
+  echo "::set-output name=repo::$repo"
   echo "::set-output name=num-violations::$num_violations"
   echo "::set-output name=num-resources::$num_resources"
   echo "::set-output name=high::$high"
