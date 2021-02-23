@@ -48,6 +48,8 @@ inputs:
 outputs:
   env-name:
     description: 'Environment Name'
+  repo:
+    description: 'Repository Location'
   num-violations:
     description: 'Number of Violations'
   num-resources:

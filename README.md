@@ -12,7 +12,7 @@ See examples below.
 ```yaml
     steps:
       - name: Accurics
-        uses: accurics/accurics-action@v1.0
+        uses: accurics/accurics-action@v1.3
         id: accurics
         with:
           app-id: ${{ secrets.ACCURICS_APP_ID }}
@@ -79,7 +79,7 @@ This example configures an Accurics Scan with a custom Terraform version and var
       - name: Checkout
         uses: actions/checkout@v2
       - name: Accurics
-        uses: accurics/accurics-action@v1.0
+        uses: accurics/accurics-action@v1.3
         id: accurics
         env: 
           # Required by Terraform
@@ -90,7 +90,7 @@ This example configures an Accurics Scan with a custom Terraform version and var
           app-id: ${{ secrets.ACCURICS_APP_ID }}
           env-id: ${{ secrets.ACCURICS_ENV_ID }}
           # Optional args
-          terraform-version: 0.12.24
+          terraform-version: 0.14.7
           plan-args: '-var myvar1=val1 -var myvar2=val2'
 ```
 
@@ -101,7 +101,7 @@ This example configures an Accurics Scan using the latest Terraform version, cus
       - name: Checkout
         uses: actions/checkout@v2
       - name: Accurics
-        uses: accurics/accurics-action@v1.0
+        uses: accurics/accurics-action@v1.3
         id: accurics
         env:
           # Required by Terraform
@@ -124,7 +124,7 @@ This is the same configuration as before, but it now includes an extra build ste
       - name: Checkout
         uses: actions/checkout@v2
       - name: Accurics
-        uses: accurics/accurics-action@v1.0
+        uses: accurics/accurics-action@v1.3
         id: accurics
         env:
           # Required by Terraform
