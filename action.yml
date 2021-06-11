@@ -82,7 +82,7 @@ runs:
     - ${{ inputs.plan-args }}
     - ${{ inputs.env-id }}
     - ${{ inputs.app-id }}
-    - ${{ inputs.repo-name }}
+    - ${{ inputs.repo }}
     - ${{ inputs.url }}
     - ${{ inputs.fail-on-violations }}
     - ${{ inputs.fail-on-all-errors }}
