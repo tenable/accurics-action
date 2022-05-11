@@ -47,7 +47,7 @@ install_terraform() {
 run_accurics() {
   local params=$1
   local plan_args=$2
-
+  touch config
   accurics init
 
   # Run accurics plan
