@@ -51,15 +51,20 @@ run_accurics() {
   local plan_args=$2
   touch config
   terrascan version
-  accurics init
+  
   runMode="plan"
    
   if [ "$ACCURICS_SCAN_MODE" = "scan" ]
   then
+     echo "running scan mode"
      runMode="scan"
+  else
+     echo "running plan mode"
+     accurics init
   fi
-  # Run accurics plan
+   # Run accurics plan
   accurics $runMode $params $plan_args
+
   ACCURICS_PLAN_ERR=$?
 }
 
