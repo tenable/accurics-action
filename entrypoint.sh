@@ -25,6 +25,7 @@ process_args() {
   export ACCURICS_ENV_ID=$INPUT_ENV_ID
   export ACCURICS_APP_ID=$INPUT_APP_ID
   export ACCURICS_REPO_NAME=$INPUT_REPO_NAME
+  export ACCURICS_SCAN_MODE=$INPUT_SCAN_MODE
 }
 
 install_terraform() {
@@ -50,9 +51,14 @@ run_accurics() {
   touch config
   terrascan version
   accurics init
-
+  runMode="plan"
+   
+  if [ "$ACCURICS_SCAN_MODE" = "scan" ]
+  then
+     runMode="scan"
+  fi
   # Run accurics plan
-  accurics plan $params $plan_args
+  accurics $runMode $params $plan_args
   ACCURICS_PLAN_ERR=$?
 }
 
