@@ -48,6 +48,7 @@ run_accurics() {
   local params=$1
   local plan_args=$2
   touch config
+  terrascan version
   accurics init
 
   # Run accurics plan
