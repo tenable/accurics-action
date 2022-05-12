@@ -90,4 +90,5 @@ runs:
     - ${{ inputs.url }}
     - ${{ inputs.fail-on-violations }}
     - ${{ inputs.fail-on-all-errors }}
+    - ${{ inputs.scan-mode }}
 
