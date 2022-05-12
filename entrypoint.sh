@@ -53,7 +53,7 @@ run_accurics() {
   
   local runMode="plan"
    
-  if [ "$INPUT_SCAN_MODE" = "scan" ]
+  if [[ "$INPUT_SCAN_MODE" = "scan" ]]
   then
      echo "running scan mode"
      runMode="scan"
