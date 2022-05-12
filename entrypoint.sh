@@ -13,8 +13,8 @@ process_args() {
   INPUT_REPO_NAME=$7
   INPUT_URL=$8
   INPUT_FAIL_ON_VIOLATIONS=$9
-  INPUT_FAIL_ON_ALL_ERRORS=$10
-  INPUT_SCAN_MODE=$11
+  INPUT_FAIL_ON_ALL_ERRORS=${10}
+  INPUT_SCAN_MODE=${11}
 
   # If all config parameters are specified, use the config params passed in instead of the config file checked into the repository
   [ "$INPUT_ENV_ID" = "" ]    && echo "Error: The env-id parameter is required and not set." && exit 1
@@ -52,7 +52,7 @@ run_accurics() {
   terrascan version
   
   local runMode="plan"
-  echo "twelve-"$11
+  echo "twelve-"${11}
   echo "INPUT_SCAN_MODE-"$INPUT_SCAN_MODE
    
   if [ "$INPUT_SCAN_MODE" = "scan" ]; then
@@ -113,7 +113,7 @@ process_output() {
 INPUT_DEBUG_MODE=$1
 [ "$INPUT_DEBUG_MODE" = "true" ] && set -x
 
-process_args "$1" "$2" "$3" "$4" "$5" "$6" "$7" "$8" "$9" "$10" "$11"
+process_args "$1" "$2" "$3" "$4" "$5" "$6" "$7" "$8" "$9" "${10}" "${11}"
 
 install_terraform $INPUT_TERRAFORM_VERSION
 
