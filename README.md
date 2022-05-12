@@ -47,6 +47,8 @@ The Accurics GitHub action runs as a Linux container, which means it accumulates
 | directories | A list of directories to scan within this repository separated by a space | ./ | 
 | fail-on-violations | Allows the Accurics Action to fail the build when violations are found | true |
 | fail-on-all-errors | Allows the Accurics Action to fail the build when any errors are encountered | true |
+| url | Allows the Accurics Action to point to different target endpoint of the product | https://app.accurics.com |
+
 
 ### Notes
 - Variable values within the plan-args setting should be stripped of double-quote (") characters
