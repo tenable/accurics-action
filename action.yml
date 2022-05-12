@@ -45,6 +45,10 @@ inputs:
     description: 'Allows Accurics to fail the build when any errors are encountered (default=true)'
     required: false
     default: true
+  scan-mode:
+    description: 'Allows Accurics to switch to terrascan based analysis'
+    required: false
+    default: "plan"
 outputs:
   env-name:
     description: 'Environment Name'
