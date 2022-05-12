@@ -52,8 +52,6 @@ run_accurics() {
   terrascan version
   
   local runMode="plan"
-  echo "twelve-"${11}
-  echo "INPUT_SCAN_MODE-"$INPUT_SCAN_MODE
    
   if [ "$INPUT_SCAN_MODE" = "scan" ]; then
      echo "running scan mode"
