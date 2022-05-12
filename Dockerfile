@@ -13,7 +13,9 @@ RUN apk update && apk add --upgrade --no-cache ca-certificates curl jq && \
 RUN curl --location https://github.com/accurics/terrascan/releases/download/v${TERRASCAN_VERSION}/terrascan_${TERRASCAN_VERSION}_Linux_x86_64.tar.gz -o terrascan.tar.gz && \
     tar xvfz terrascan.tar.gz && \
     rm -f terrascan.tar.gz && \
-    mv terrascan /usr/bin/
+    mv terrascan /usr/bin/ && \
+    terrascan version
+    
     
 
 # Code file to execute when the docker container starts up (`entrypoint.sh`)
