@@ -88,6 +88,7 @@ This example configures an Accurics Scan with a custom Terraform version and var
           # Required by Terraform
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          REPO_URL: ${{ github.repositoryUrl }}
         with:
           # Required by Accurics
           app-id: ${{ secrets.ACCURICS_APP_ID }}
@@ -110,6 +111,7 @@ This example configures an Accurics Scan using the latest Terraform version, cus
           # Required by Terraform
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          REPO_URL: ${{ github.repositoryUrl }}
         with:
           # Required by Accurics
           app-id: ${{ secrets.ACCURICS_APP_ID }}
@@ -133,6 +135,7 @@ This is the same configuration as before, but it now includes an extra build ste
           # Required by Terraform
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          REPO_URL: ${{ github.repositoryUrl }}
         with:
           # Required by Accurics
           app-id: ${{ secrets.ACCURICS_APP_ID }}
