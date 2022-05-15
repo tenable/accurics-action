@@ -27,7 +27,6 @@ process_args() {
   export ACCURICS_ENV_ID=$INPUT_ENV_ID
   export ACCURICS_APP_ID=$INPUT_APP_ID
   export ACCURICS_REPO_NAME=$INPUT_REPO_NAME
-  export REPO_URL=${{ github.repositoryUrl }}
 }
 
 install_terraform() {
