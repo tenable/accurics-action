@@ -47,7 +47,7 @@ The Accurics GitHub action runs as a Linux container, which means it accumulates
 | directories | A list of directories to scan within this repository separated by a space | ./ | 
 | fail-on-violations | Allows the Accurics Action to fail the build when violations are found | true |
 | fail-on-all-errors | Allows the Accurics Action to fail the build when any errors are encountered | true |
-| url | Allows the Accurics Action to point to different target endpoint of the product | https://app.accurics.com |
+| url | Allows the Accurics Action to point to different target endpoint of the product | https://app.accurics.com or https://cloud.tenable.com/cns|
 
 
 ### Notes
@@ -140,6 +140,7 @@ This is the same configuration as before, but it now includes an extra build ste
           # Optional args
           plan-args: '-var myvar1=val1 -var myvar2=val2'
           fail-on-violations: false
+          url: https://cloud.tenable.com/cns
       - name: Display statistics
         run: '
             echo ""
