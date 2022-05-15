@@ -15,6 +15,7 @@ process_args() {
   INPUT_FAIL_ON_VIOLATIONS=$9
   INPUT_FAIL_ON_ALL_ERRORS=${10}
   INPUT_SCAN_MODE=${11}
+  INPUT_PIPELINE=${12}
 
   # If all config parameters are specified, use the config params passed in instead of the config file checked into the repository
   [ "$INPUT_ENV_ID" = "" ]    && echo "Error: The env-id parameter is required and not set." && exit 1
@@ -52,6 +53,7 @@ run_accurics() {
   terrascan version
   
   local runMode="plan"
+  local pipeline_mode=""
    
   if [ "$INPUT_SCAN_MODE" = "scan" ]; then
      echo "running scan mode"
@@ -60,8 +62,14 @@ run_accurics() {
      echo "running plan mode"
      accurics init
   fi
+  
+  if [ "$INPUT_PIPELINE" = true ]; then
+     echo "running pipeline mode"
+     pipeline_mode="-mode=pipeline"
+  fi
+  
    # Run accurics plan
-  accurics $runMode $params $plan_args
+  accurics $runMode $params $plan_args $pipeline_mode
 
   ACCURICS_PLAN_ERR=$?
 }
