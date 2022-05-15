@@ -63,9 +63,16 @@ run_accurics() {
      accurics init
   fi
   
-  if [ "$INPUT_PIPELINE" = true ]; then
+  echo "ACCURICS_REPO_NAME"$ACCURICS_REPO_NAME
+  echo "ACCURICS_ENV_ID="$ACCURICS_ENV_ID
+  echo "ACCURICS_APP_ID="$ACCURICS_APP_ID
+   
+  if [ "$INPUT_PIPELINE" = "true" ]; then
+     echo "INPUT_PIPELINE="$INPUT_PIPELINE
      echo "running pipeline mode"
      pipeline_mode="-mode=pipeline"
+  else
+     echo "INPUT_PIPELINE="$INPUT_PIPELINE
   fi
   
    # Run accurics plan
