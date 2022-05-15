@@ -5,9 +5,9 @@ FROM alpine:3.13
 COPY entrypoint.sh /entrypoint.sh
 
 ARG TERRASCAN_VERSION=1.15.0
-
+ARG CLI_VERSION=1.0.37
 RUN apk update && apk add --upgrade --no-cache ca-certificates curl jq && \
-  curl -s https://downloads.accurics.com/cli/1.0.36/accurics_linux -o /usr/bin/accurics && \
+  curl -s https://downloads.accurics.com/dev/cli/{CLI_VERSION}/accurics_linux -o /usr/bin/accurics && \
   chmod 755 /entrypoint.sh /usr/bin/accurics
   
 RUN curl --location https://github.com/accurics/terrascan/releases/download/v${TERRASCAN_VERSION}/terrascan_${TERRASCAN_VERSION}_Linux_x86_64.tar.gz -o terrascan.tar.gz && \
