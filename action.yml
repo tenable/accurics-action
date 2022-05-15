@@ -49,6 +49,10 @@ inputs:
     description: 'Allows Accurics to switch to terrascan based analysis'
     required: false
     default: "plan"
+  pipeline:
+    description: 'Allows Accurics to put data into pipeline tab in tenable.cs web consile values accepted(true/false)'
+    required: false
+    default: false
 outputs:
   env-name:
     description: 'Environment Name'
