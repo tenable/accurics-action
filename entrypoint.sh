@@ -119,7 +119,7 @@ process_output() {
 INPUT_DEBUG_MODE=$1
 [ "$INPUT_DEBUG_MODE" = "true" ] && set -x
 
-process_args "$1" "$2" "$3" "$4" "$5" "$6" "$7" "$8" "$9" "${10}" "${11}"
+process_args "$1" "$2" "$3" "$4" "$5" "$6" "$7" "$8" "$9" "${10}" "${11}" "${12}"
 
 install_terraform $INPUT_TERRAFORM_VERSION
 
