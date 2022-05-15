@@ -95,4 +95,5 @@ runs:
     - ${{ inputs.fail-on-violations }}
     - ${{ inputs.fail-on-all-errors }}
     - ${{ inputs.scan-mode }}
+    - ${{ inputs.pipeline }}
 
