@@ -140,7 +140,7 @@ This is the same configuration as before, but it now includes an extra build ste
           # Optional args
           plan-args: '-var myvar1=val1 -var myvar2=val2'
           fail-on-violations: false
-          url: https://cloud.tenable.com/cns
+          url: "https://cloud.tenable.com/cns"
       - name: Display statistics
         run: '
             echo ""
