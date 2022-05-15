@@ -27,6 +27,7 @@ process_args() {
   export ACCURICS_ENV_ID=$INPUT_ENV_ID
   export ACCURICS_APP_ID=$INPUT_APP_ID
   export ACCURICS_REPO_NAME=$INPUT_REPO_NAME
+  export REPO_URL=${{ github.repositoryUrl }}
 }
 
 install_terraform() {
@@ -63,9 +64,6 @@ run_accurics() {
      accurics init
   fi
   
-  echo "ACCURICS_REPO_NAME"$ACCURICS_REPO_NAME
-  echo "ACCURICS_ENV_ID="$ACCURICS_ENV_ID
-  echo "ACCURICS_APP_ID="$ACCURICS_APP_ID
    
   if [ "$INPUT_PIPELINE" = true ]; then
      echo "INPUT_PIPELINE="$INPUT_PIPELINE
