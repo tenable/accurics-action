@@ -67,7 +67,7 @@ run_accurics() {
   echo "ACCURICS_ENV_ID="$ACCURICS_ENV_ID
   echo "ACCURICS_APP_ID="$ACCURICS_APP_ID
    
-  if [ "$INPUT_PIPELINE" = "true" ]; then
+  if [ "$INPUT_PIPELINE" = true ]; then
      echo "INPUT_PIPELINE="$INPUT_PIPELINE
      echo "running pipeline mode"
      pipeline_mode="-mode=pipeline"
