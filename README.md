@@ -90,6 +90,8 @@ This example configures an Accurics Scan with a custom Terraform version and var
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           REPO_URL: ${{ github.repositoryUrl }}
+          GIT_BRANCH:  ${{ github.ref_name }}
+          GIT_COMMIT:  ${{ github.sha }}
         with:
           # Required by Accurics
           app-id: ${{ secrets.ACCURICS_APP_ID }}
@@ -97,6 +99,7 @@ This example configures an Accurics Scan with a custom Terraform version and var
           # Optional args
           terraform-version: 0.14.7
           plan-args: '-var myvar1=val1 -var myvar2=val2'
+          url: "https://cloud.tenable.com/cns"
 ```
 
 ### Example 2:
@@ -113,6 +116,8 @@ This example configures an Accurics Scan using the latest Terraform version, cus
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           REPO_URL: ${{ github.repositoryUrl }}
+          GIT_BRANCH:  ${{ github.ref_name }}
+          GIT_COMMIT:  ${{ github.sha }}
         with:
           # Required by Accurics
           app-id: ${{ secrets.ACCURICS_APP_ID }}
@@ -121,6 +126,7 @@ This example configures an Accurics Scan using the latest Terraform version, cus
           # Optional args
           plan-args: '-var myvar1=val1 -var myvar2=val2'
           fail-on-violations: false
+          url: "https://cloud.tenable.com/cns"
 ```
 
 ### Example 3:
@@ -137,6 +143,8 @@ This is the same configuration as before, but it now includes an extra build ste
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           REPO_URL: ${{ github.repositoryUrl }}
+          GIT_BRANCH:  ${{ github.ref_name }}
+          GIT_COMMIT:  ${{ github.sha }}
         with:
           # Required by Accurics
           app-id: ${{ secrets.ACCURICS_APP_ID }}
