@@ -211,7 +211,7 @@ This is the same configuration as before, but it now includes an extra build ste
           repo: "your-repo-name-from-web-console"
           url: "https://cloud.tenable.com/cns"
           fail-on-violations: false
-          scan-mode: "scan"
+          scan-mode: "plan"
           pipeline: false
       - name: Display statistics
         run: '
