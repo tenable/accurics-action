@@ -200,7 +200,6 @@ This is the same configuration as before, but it now includes an extra build ste
           # Required by Terraform
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          # REPO_URL: "https://github.com/nitumore/githubactiontfdemo.git"
           REPO_URL: ${{ github.repositoryUrl }}
           GIT_BRANCH:  ${{ github.ref_name }}
           GIT_COMMIT:  ${{ github.sha }}
@@ -209,11 +208,11 @@ This is the same configuration as before, but it now includes an extra build ste
           # Required by Accurics
           app-id: ${{ secrets.ACCURICS_APP_ID }}
           env-id: ${{ secrets.ACCURICS_ENV_ID }}
-          repo: "githubactionrepo"
+          repo: "your-repo-name-from-web-console"
           url: "https://cloud.tenable.com/cns"
           fail-on-violations: false
           scan-mode: "scan"
-          pipeline: true
+          pipeline: false
       - name: Display statistics
         run: '
             echo ""
