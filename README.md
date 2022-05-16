@@ -66,10 +66,6 @@ The Accurics GitHub action runs as a Linux container, which means it accumulates
 | Medium-Severity Violations | $medium |
 | Low-Severity Violations | $low |
 | Native Resources | $native |
-| Inherited Resources | $inherited |
-| Drift | $drift |
-| IaC Drift | $iacdrift |
-| Cloud Drift | $clouddrift |
 | has-errors | $has_errors |
 
 ## Examples
