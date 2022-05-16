@@ -123,10 +123,12 @@ This example configures an Accurics Scan using the latest Terraform version, cus
           plan-args: '-var myvar1=val1 -var myvar2=val2'
           fail-on-violations: false
           url: "https://cloud.tenable.com/cns"
+          scan-mode: "plan"
+          pipeline: true
 ```
 
 ### Example 3:
-This is the same configuration as before, but it now includes an extra build step to display the output scan status.
+This is the same configuration as before, but it now includes an extra build step to display the output scan status, also sets scan mode to terrascan scan.
 ```yaml
     steps:
       - name: Checkout
@@ -150,6 +152,8 @@ This is the same configuration as before, but it now includes an extra build ste
           plan-args: '-var myvar1=val1 -var myvar2=val2'
           fail-on-violations: false
           url: "https://cloud.tenable.com/cns"
+          scan-mode: "scan"
+          pipeline: true
       - name: Display statistics
         run: '
             echo ""
