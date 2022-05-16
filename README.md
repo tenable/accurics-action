@@ -48,7 +48,7 @@ The Accurics GitHub action runs as a Linux container, which means it accumulates
 | fail-on-violations | Allows the Accurics Action to fail the build when violations are found | true |
 | fail-on-all-errors | Allows the Accurics Action to fail the build when any errors are encountered | true |
 | scan-mode | Allows the Accurics Action to use either terraform or terrascan for scanning(plan/scan) | plan |
-| url | Allows the Accurics Action to point to different target endpoint of the product e.g. https://cloud.tenable.com/cns | https://cloud.tenable.com/cns |
+| url | Allows the Accurics Action to point to different target endpoint of the product e.g. https://cloud.tenable.com/cns | https://app.accurics.com |
 | pipeline | Allows the Accurics Action to choose mode as pipeline | false |
 
 
