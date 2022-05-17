@@ -13,7 +13,9 @@ process_args() {
   INPUT_REPO_NAME=$7
   INPUT_URL=$8
   INPUT_FAIL_ON_VIOLATIONS=$9
-  INPUT_FAIL_ON_ALL_ERRORS=$10
+  INPUT_FAIL_ON_ALL_ERRORS=${10}
+  INPUT_SCAN_MODE=${11}
+  INPUT_PIPELINE=${12}
 
   # If all config parameters are specified, use the config params passed in instead of the config file checked into the repository
   [ "$INPUT_ENV_ID" = "" ]    && echo "Error: The env-id parameter is required and not set." && exit 1
@@ -47,11 +49,32 @@ install_terraform() {
 run_accurics() {
   local params=$1
   local plan_args=$2
+  touch config
+  terrascan version
+  
+  local runMode="plan"
+  local pipeline_mode=""
+   
+  if [ "$INPUT_SCAN_MODE" = "scan" ]; then
+     echo "running scan mode"
+     runMode="scan"
+  else
+     echo "running plan mode"
+     accurics init
+  fi
+  
+   
+  if [ "$INPUT_PIPELINE" = true ]; then
+     echo "INPUT_PIPELINE="$INPUT_PIPELINE
+     echo "running pipeline mode"
+     pipeline_mode="-mode=pipeline"
+  else
+     echo "INPUT_PIPELINE="$INPUT_PIPELINE
+  fi
+  
+   # Run accurics plan
+  accurics $runMode $params $plan_args $pipeline_mode
 
-  accurics init
-
-  # Run accurics plan
-  accurics plan $params $plan_args
   ACCURICS_PLAN_ERR=$?
 }
 
@@ -100,7 +123,7 @@ process_output() {
 INPUT_DEBUG_MODE=$1
 [ "$INPUT_DEBUG_MODE" = "true" ] && set -x
 
-process_args "$1" "$2" "$3" "$4" "$5" "$6" "$7" "$8" "$9" "$10"
+process_args "$1" "$2" "$3" "$4" "$5" "$6" "$7" "$8" "$9" "${10}" "${11}" "${12}"
 
 install_terraform $INPUT_TERRAFORM_VERSION
 

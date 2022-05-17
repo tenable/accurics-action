@@ -45,6 +45,14 @@ inputs:
     description: 'Allows Accurics to fail the build when any errors are encountered (default=true)'
     required: false
     default: true
+  scan-mode:
+    description: 'Allows Accurics to switch to terrascan based analysis'
+    required: false
+    default: "plan"
+  pipeline:
+    description: 'Allows Accurics to put data into pipeline tab in tenable.cs web consile values accepted(true/false)'
+    required: false
+    default: false
 outputs:
   env-name:
     description: 'Environment Name'
@@ -86,4 +94,6 @@ runs:
     - ${{ inputs.url }}
     - ${{ inputs.fail-on-violations }}
     - ${{ inputs.fail-on-all-errors }}
+    - ${{ inputs.scan-mode }}
+    - ${{ inputs.pipeline }}
 

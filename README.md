@@ -3,8 +3,8 @@
 ## Description
 The Accurics GitHub action runs an Accurics scan against the IaC (Infrastructure-as-Code) files found within the applied repository.
 This action can be used to fail a pipeline build when violations or errors are found.
-The scan results can be viewed in the pipeline results or in the Accurics Console itself at https://app.accurics.com
-
+The scan results can be viewed in the pipeline results or in the Accurics Console itself at https://cloud.tenable.com/cns or https://app.accurics.com
+ depending on url configured. 
 See examples below.
 
 ## Setup
@@ -47,6 +47,10 @@ The Accurics GitHub action runs as a Linux container, which means it accumulates
 | directories | A list of directories to scan within this repository separated by a space | ./ | 
 | fail-on-violations | Allows the Accurics Action to fail the build when violations are found | true |
 | fail-on-all-errors | Allows the Accurics Action to fail the build when any errors are encountered | true |
+| scan-mode | Allows the Accurics Action to use either terraform or terrascan for scanning(plan/scan) | plan |
+| url | Allows the Accurics Action to point to different target endpoint of the product e.g. https://cloud.tenable.com/cns | https://app.accurics.com |
+| pipeline | Allows the Accurics Action to choose mode as pipeline | false |
+
 
 ### Notes
 - Variable values within the plan-args setting should be stripped of double-quote (") characters
@@ -62,10 +66,6 @@ The Accurics GitHub action runs as a Linux container, which means it accumulates
 | Medium-Severity Violations | $medium |
 | Low-Severity Violations | $low |
 | Native Resources | $native |
-| Inherited Resources | $inherited |
-| Drift | $drift |
-| IaC Drift | $iacdrift |
-| Cloud Drift | $clouddrift |
 | has-errors | $has_errors |
 
 ## Examples
@@ -85,6 +85,9 @@ This example configures an Accurics Scan with a custom Terraform version and var
           # Required by Terraform
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          REPO_URL: ${{ github.repositoryUrl }}
+          GIT_BRANCH:  ${{ github.ref_name }}
+          GIT_COMMIT:  ${{ github.sha }}
         with:
           # Required by Accurics
           app-id: ${{ secrets.ACCURICS_APP_ID }}
@@ -92,6 +95,7 @@ This example configures an Accurics Scan with a custom Terraform version and var
           # Optional args
           terraform-version: 0.14.7
           plan-args: '-var myvar1=val1 -var myvar2=val2'
+          url: "https://cloud.tenable.com/cns"
 ```
 
 ### Example 2:
@@ -107,6 +111,9 @@ This example configures an Accurics Scan using the latest Terraform version, cus
           # Required by Terraform
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          REPO_URL: ${{ github.repositoryUrl }}
+          GIT_BRANCH:  ${{ github.ref_name }}
+          GIT_COMMIT:  ${{ github.sha }}
         with:
           # Required by Accurics
           app-id: ${{ secrets.ACCURICS_APP_ID }}
@@ -115,10 +122,13 @@ This example configures an Accurics Scan using the latest Terraform version, cus
           # Optional args
           plan-args: '-var myvar1=val1 -var myvar2=val2'
           fail-on-violations: false
+          url: "https://cloud.tenable.com/cns"
+          scan-mode: "plan"
+          pipeline: true
 ```
 
 ### Example 3:
-This is the same configuration as before, but it now includes an extra build step to display the output scan status.
+This is the same configuration as before, but it now includes an extra build step to display the output scan status, also sets scan mode to terrascan scan.
 ```yaml
     steps:
       - name: Checkout
@@ -130,6 +140,9 @@ This is the same configuration as before, but it now includes an extra build ste
           # Required by Terraform
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          REPO_URL: ${{ github.repositoryUrl }}
+          GIT_BRANCH:  ${{ github.ref_name }}
+          GIT_COMMIT:  ${{ github.sha }}
         with:
           # Required by Accurics
           app-id: ${{ secrets.ACCURICS_APP_ID }}
@@ -138,6 +151,9 @@ This is the same configuration as before, but it now includes an extra build ste
           # Optional args
           plan-args: '-var myvar1=val1 -var myvar2=val2'
           fail-on-violations: false
+          url: "https://cloud.tenable.com/cns"
+          scan-mode: "scan"
+          pipeline: true
       - name: Display statistics
         run: '
             echo ""
@@ -158,5 +174,71 @@ This is the same configuration as before, but it now includes an extra build ste
             echo "Cloud Drift                : ${{ steps.accurics.outputs.clouddrift }}";
             echo ""
           '
+```
+### Example 4: This is the example to check number of violations and fail the build in case not satisfied.
+```yaml
+    steps:
+      - run: touch config
+      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+      - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
+      - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
+      - name: Check out repository code
+        uses: actions/checkout@v2
+      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
+      - run: echo "🖥️ The workflow is now ready to test your code on the runner."
+      - name: List files in the repository
+        run: |
+          ls ${{ github.workspace }}
+      - name: Get git branch
+        run: |
+          git branch
+      - name: Accurics
+        
+        uses: accurics/accurics-action@v2.25
+        id: accurics
+        env:
+          # Required by Terraform
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          REPO_URL: ${{ github.repositoryUrl }}
+          GIT_BRANCH:  ${{ github.ref_name }}
+          GIT_COMMIT:  ${{ github.sha }}
+         
+        with:
+          # Required by Accurics
+          app-id: ${{ secrets.ACCURICS_APP_ID }}
+          env-id: ${{ secrets.ACCURICS_ENV_ID }}
+          repo: "your-repo-name-from-web-console"
+          url: "https://cloud.tenable.com/cns"
+          fail-on-violations: false
+          scan-mode: "plan"
+          pipeline: false
+      - name: Display statistics
+        run: '
+            echo ""
+            echo "Environment Name           : ${{ steps.accurics.outputs.env-name }}";
+            echo "Repository                 : ${{ steps.accurics.outputs.repo }}";
+            echo "Violation Count            : ${{ steps.accurics.outputs.num-violations }}";
+            echo "Resource Count             : ${{ steps.accurics.outputs.num-resources }}";
+            echo ""
+            echo "Native Resources           : ${{ steps.accurics.outputs.native }}";
+            echo "Inherited Resources        : ${{ steps.accurics.outputs.inherited }}";
+            echo ""
+            echo "High-Severity Violations   : ${{ steps.accurics.outputs.high }}";
+            echo "Medium-Severity Violations : ${{ steps.accurics.outputs.medium }}";
+            echo "Low-Severity Violations    : ${{ steps.accurics.outputs.low }}";
+            echo ""
+            echo "Drift                      : ${{ steps.accurics.outputs.drift }}";
+            echo "IaC Drift                  : ${{ steps.accurics.outputs.iacdrift }}";
+            echo "Cloud Drift                : ${{ steps.accurics.outputs.clouddrift }}";
+            echo ""
+          '
+      - name: Check Number Of violations
+        if: ${{ steps.accurics.outputs.num-violations > 10 }}
+        uses: actions/github-script@v3
+        with:
+          script: |
+              core.setFailed('Coverage test below tolerance')
+
 ```
 

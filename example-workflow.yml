@@ -20,6 +20,7 @@ jobs:
           # Credentials are required by Terraform. They can be specified using any method that Terraform accepts
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          REPO_URL: ${{ github.repositoryUrl }}
         with:
           # A specific Terraform version can be chosen (default=latest)
           terraform-version: 0.14.7
