@@ -53,6 +53,14 @@ inputs:
     description: 'Allows Accurics to put data into pipeline tab in tenable.cs web consile values accepted(true/false)'
     required: false
     default: false
+  run-mode:
+    description: 'Allows run terragrunt or terraform (plan/tgplan)'
+    required: false
+    default: "plan"
+  terragrunt-version:
+    description: 'Allows install terragrunt DRY Terraform'
+    required: false
+    default: ""
 outputs:
   env-name:
     description: 'Environment Name'
@@ -96,4 +104,6 @@ runs:
     - ${{ inputs.fail-on-all-errors }}
     - ${{ inputs.scan-mode }}
     - ${{ inputs.pipeline }}
+    - ${{ inputs.run-mode }}
+    - ${{ inputs.terragrunt-version }}
 
