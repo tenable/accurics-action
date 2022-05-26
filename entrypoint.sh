@@ -97,6 +97,28 @@ run_accurics() {
      echo "INPUT_PIPELINE="$INPUT_PIPELINE
   fi
   
+  # Tracing section
+  #current level
+  pwd
+  ls
+  cd ..
+  #1 level behaind
+  pwd
+  ls
+  cd ..
+  #2 level behaind
+  pwd
+  ls
+  cd ..
+  #3 level behaind
+  pwd
+  ls
+  cd ..
+  #4 level behaind
+  pwd
+  ls
+  cd ..
+  
    # Run accurics plan
   accurics $INPUT_RUN_MODE $params $plan_args $pipeline_mode
 
