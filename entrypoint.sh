@@ -118,7 +118,27 @@ run_accurics() {
   pwd
   ls
   cd ..
-  
+  #5 level behaind
+  pwd
+  ls
+  cd ..
+  #6 level behaind
+  pwd
+  ls
+  cd ..
+  #7 level behaind
+  pwd
+  ls
+  cd ..
+  #8 level behaind
+  pwd
+  ls
+  cd ..
+  #9 level behaind
+  pwd
+  ls
+  cd ..
+
    # Run accurics plan
   accurics $INPUT_RUN_MODE $params $plan_args $pipeline_mode
 
