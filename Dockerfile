@@ -15,8 +15,6 @@ RUN curl --location https://github.com/accurics/terrascan/releases/download/v${T
     rm -f terrascan.tar.gz && \
     mv terrascan /usr/bin/ && \
     terrascan version
-    
-    
 
 # Code file to execute when the docker container starts up (`entrypoint.sh`)
 ENTRYPOINT ["/entrypoint.sh"]
