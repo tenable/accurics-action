@@ -16,9 +16,8 @@ RUN curl --location https://github.com/accurics/terrascan/releases/download/v${T
     mv terrascan /usr/bin/ && \
     terrascan version
 
-#Support cloning by ssh    
+# Github clone by ssh compatibility    
 RUN ["/bin/sh", "-c", "apk add --update --no-cache bash ca-certificates curl git jq openssh"]
-
 
 # Code file to execute when the docker container starts up (`entrypoint.sh`)
 ENTRYPOINT ["/entrypoint.sh"]
