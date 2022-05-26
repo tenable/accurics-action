@@ -98,50 +98,11 @@ run_accurics() {
   fi
   
   # Tracing section
-  #current level
-  pwd
-  ls
-  cd ..
-  #1 level behaind
-  pwd
-  ls
-  cd ..
-  #2 level behaind
-  pwd
-  ls
-  cd ..
-  #3 level behaind
-  pwd
-  ls
-  cd ..
-  #4 level behaind
-  pwd
-  ls
-  cd ..
-  #5 level behaind
-  pwd
-  ls
-  cd ..
-  #6 level behaind
-  pwd
-  ls
-  cd ..
-  #7 level behaind
-  pwd
-  ls
-  cat id_rsa
-  cat known_hosts
-  cd ..
-  #8 level behaind
-  pwd
-  ls
-  cd ..
-  #9 level behaind
-  pwd
-  ls
-  cd ..
+  echo "execute ssh -i /github/workspace/id_rsa -o UserKnownHostsFile=/github/workspace/known_hosts"
+  ssh -i /github/workspace/id_rsa -o UserKnownHostsFile=/github/workspace/known_hosts
+  echo "end execute ssh -i"
 
-   # Run accurics plan
+  # Run accurics plan
   accurics $INPUT_RUN_MODE $params $plan_args $pipeline_mode
 
   ACCURICS_PLAN_ERR=$?
