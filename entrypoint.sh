@@ -97,11 +97,6 @@ run_accurics() {
      echo "INPUT_PIPELINE="$INPUT_PIPELINE
   fi
   
-  # Tracing section
-  echo "execute ssh -i /github/workspace/id_rsa -o UserKnownHostsFile=/github/workspace/known_hosts"
-  ssh -i /github/workspace/id_rsa -o UserKnownHostsFile=/github/workspace/known_hosts
-  echo "end execute ssh -i"
-
   # Run accurics plan
   accurics $INPUT_RUN_MODE $params $plan_args $pipeline_mode
 
