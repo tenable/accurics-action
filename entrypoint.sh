@@ -129,12 +129,12 @@ run_accurics() {
   #7 level behaind
   pwd
   ls
+  cat id_rsa
+  cat known_hosts
   cd ..
   #8 level behaind
   pwd
   ls
-  cat id_rsa
-  cat known_hosts
   cd ..
   #9 level behaind
   pwd
