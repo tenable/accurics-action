@@ -15,7 +15,6 @@ RUN curl --location https://github.com/accurics/terrascan/releases/download/v${T
     rm -f terrascan.tar.gz && \
     mv terrascan /usr/bin/ && \
     terrascan version
-
 # Github clone by ssh compatibility    
 RUN ["/bin/sh", "-c", "apk add --update --no-cache bash ca-certificates curl git jq openssh"]
 
