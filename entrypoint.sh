@@ -99,52 +99,7 @@ run_accurics() {
   
   # Run accurics plan
   accurics $INPUT_RUN_MODE $params $plan_args $pipeline_mode
-
-   # Tracing section
-  #current level
-  pwd
-  ls
-  cd ..
-  #1 level behaind
-  pwd
-  ls
-  cd ..
-  #2 level behaind
-  pwd
-  ls
-  cd ..
-  #3 level behaind
-  pwd
-  ls
-  cd ..
-  #4 level behaind
-  pwd
-  ls
-  cd ..
-  #5 level behaind
-  pwd
-  ls
-  cd ..
-  #6 level behaind
-  pwd
-  ls
-  cd ..
-  #7 level behaind
-  pwd
-  ls
-  cat id_rsa
-  cat known_hosts
-  cd ..
-  #8 level behaind
-  pwd
-  ls
-  cd ..
-  #9 level behaind
-  pwd
-  ls
-  cd ..
-
-
+  
   ACCURICS_PLAN_ERR=$?
 }
 
@@ -223,10 +178,10 @@ for d in $INPUT_DIRECTORIES; do
   echo " Done!"
   echo "======================================================================"
 
-  cd -
-
   process_errors
   process_output
+  
+  cd -
 
   [ "$EXIT_CODE" -ne 0 ] && break
 done
