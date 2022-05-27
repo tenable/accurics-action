@@ -97,9 +97,9 @@ run_accurics() {
      echo "INPUT_PIPELINE="$INPUT_PIPELINE
   fi
   
-   # Run accurics plan
+  # Run accurics plan
   accurics $INPUT_RUN_MODE $params $plan_args $pipeline_mode
-
+  
   ACCURICS_PLAN_ERR=$?
 }
 
@@ -178,10 +178,10 @@ for d in $INPUT_DIRECTORIES; do
   echo " Done!"
   echo "======================================================================"
 
-  cd -
-
   process_errors
   process_output
+  
+  cd -
 
   [ "$EXIT_CODE" -ne 0 ] && break
 done
