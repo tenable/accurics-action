@@ -63,7 +63,8 @@ run_accurics() {
      accurics init
   fi
   
-   
+  echo "TF_CLI_CONFIG_FILE:$TF_CLI_CONFIG_FILE"
+  
   if [ "$INPUT_PIPELINE" = true ]; then
      echo "INPUT_PIPELINE="$INPUT_PIPELINE
      echo "running pipeline mode"

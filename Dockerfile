@@ -4,8 +4,8 @@ FROM alpine:3.13
 # Copies your code file from your action repository to the filesystem path `/` of the container
 COPY entrypoint.sh /entrypoint.sh
 
-ARG TERRASCAN_VERSION=1.15.0
-ARG CLI_VERSION=1.0.37
+ARG TERRASCAN_VERSION=1.15.2
+ARG CLI_VERSION=1.0.41
 RUN apk update && apk add --upgrade --no-cache ca-certificates curl jq git && \
   curl -s https://downloads.accurics.com/cli/dev/${CLI_VERSION}/accurics_linux -o /usr/bin/accurics && \
   chmod 755 /entrypoint.sh /usr/bin/accurics
