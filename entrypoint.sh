@@ -63,18 +63,6 @@ run_accurics() {
      accurics init
   fi
   
-#   echo "forcing TF_CLI_CONFIG_FILE"
-#   export TF_CLI_CONFIG_FILE=.terraformrc
-#   echo "value of TF_CLI_CONFIG_FILE=$TF_CLI_CONFIG_FILE"
-#   echo $TF_CLI_CONFIG_FILE
-#   echo "GITHUB_ENV:$GITHUB_ENV"
-  
-  #echo "TF_CLI_CONFIG_FILE=.terraformrc" >> $GITHUB_ENV
-  #echo "GITHUB_ENV:$GITHUB_ENV"
-  #echo "printing content of file"
-  #cat  .terraformrc
-  #echo "printing content of file"
-  #cat ./.terraformrc
   echo "TF_CLI_CONFIG_FILE:$TF_CLI_CONFIG_FILE"
   
   if [ "$INPUT_PIPELINE" = true ]; then
