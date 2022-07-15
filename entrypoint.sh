@@ -71,6 +71,10 @@ run_accurics() {
   
   echo "TF_CLI_CONFIG_FILE=.terraformrc" >> $GITHUB_ENV
   echo "GITHUB_ENV:$GITHUB_ENV"
+  echo "printing content of file"
+  cat  .terraformrc
+  echo "printing content of file"
+  cat ./.terraformrc
   
   if [ "$INPUT_PIPELINE" = true ]; then
      echo "INPUT_PIPELINE="$INPUT_PIPELINE
