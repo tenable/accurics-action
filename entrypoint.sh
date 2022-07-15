@@ -63,7 +63,11 @@ run_accurics() {
      accurics init
   fi
   
-   
+  echo "forcing TF_CLI_CONFIG_FILE"
+  export TF_CLI_CONFIG_FILE=.terraformrc
+  echo "value of TF_CLI_CONFIG_FILE=$TF_CLI_CONFIG_FILE"
+  echo $TF_CLI_CONFIG_FILE
+  
   if [ "$INPUT_PIPELINE" = true ]; then
      echo "INPUT_PIPELINE="$INPUT_PIPELINE
      echo "running pipeline mode"
