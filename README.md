@@ -12,7 +12,7 @@ See examples below.
 ```yaml
     steps:
       - name: Accurics
-        uses: accurics/accurics-action@v1.3.1
+        uses: accurics/accurics-action@v2.0.2
         id: accurics
         with:
           app-id: ${{ secrets.ACCURICS_APP_ID }}
@@ -44,7 +44,7 @@ The Accurics GitHub action runs as a Linux container, which means it accumulates
 | -------------------- | ----------------------------------------------------------- | --------- |
 | terraform-version | The Terraform version used to process the files in this repository | latest | 
 | plan-args | The Terraform version used to process the files in this repository | | 
-| directories | A list of directories to scan within this repository separated by a space | ./ | 
+| directories | A directory to scan within this repository | ./ | 
 | fail-on-violations | Allows the Accurics Action to fail the build when violations are found | true |
 | fail-on-all-errors | Allows the Accurics Action to fail the build when any errors are encountered | true |
 | scan-mode | Allows the Accurics Action to use either terraform or terrascan for scanning(plan/scan) | plan |
@@ -79,7 +79,7 @@ This example configures an Accurics Scan with a custom Terraform version and var
       - name: Checkout
         uses: actions/checkout@v2
       - name: Accurics
-        uses: accurics/accurics-action@v1.3.1
+        uses: accurics/accurics-action@v2.0.2
         id: accurics
         env: 
           # Required by Terraform
@@ -105,7 +105,7 @@ This example configures an Accurics Scan using the latest Terraform version, cus
       - name: Checkout
         uses: actions/checkout@v2
       - name: Accurics
-        uses: accurics/accurics-action@v1.3.1
+        uses: accurics/accurics-action@v2.0.2
         id: accurics
         env:
           # Required by Terraform
@@ -134,7 +134,7 @@ This is the same configuration as before, but it now includes an extra build ste
       - name: Checkout
         uses: actions/checkout@v2
       - name: Accurics
-        uses: accurics/accurics-action@v1.3.1
+        uses: accurics/accurics-action@v2.0.2
         id: accurics
         env:
           # Required by Terraform
