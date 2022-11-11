@@ -36,7 +36,7 @@ inputs:
   url:
     description: 'Accurics Application URL'
     required: false
-    default: 'https://app.accurics.com'
+    default: 'https://cloud.tenable.com/cns'
   fail-on-violations:
     description: 'Allows Accurics to fail the build when violations are found (default=true)'
     required: false
