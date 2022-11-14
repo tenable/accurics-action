@@ -3,7 +3,7 @@
 ## Description
 The Accurics GitHub action runs an Accurics scan against the IaC (Infrastructure-as-Code) files found within the applied repository.
 This action can be used to fail a pipeline build when violations or errors are found.
-The scan results can be viewed in the pipeline results or in the Accurics Console itself at https://cloud.tenable.com/cns or https://app.accurics.com
+The scan results can be viewed in the pipeline results or in the Accurics Console itself at https://cloud.tenable.com/cns
  depending on url configured. 
 See examples below.
 
@@ -48,7 +48,7 @@ The Accurics GitHub action runs as a Linux container, which means it accumulates
 | fail-on-violations | Allows the Accurics Action to fail the build when violations are found | true |
 | fail-on-all-errors | Allows the Accurics Action to fail the build when any errors are encountered | true |
 | scan-mode | Allows the Accurics Action to use either terraform or terrascan for scanning(plan/scan) | plan |
-| url | Allows the Accurics Action to point to different target endpoint of the product e.g. https://cloud.tenable.com/cns | https://app.accurics.com |
+| url | Allows the Accurics Action to point to different target endpoint of the product e.g. https://cloud.tenable.com/cns | https://cloud.tenable.com/cns |
 | pipeline | Allows the Accurics Action to choose mode as pipeline | false |
 
 
