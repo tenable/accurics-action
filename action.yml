@@ -96,4 +96,11 @@ runs:
     - ${{ inputs.fail-on-all-errors }}
     - ${{ inputs.scan-mode }}
     - ${{ inputs.pipeline }}
-
+    steps:
+      - name: Accurics
+        uses: accurics/accurics-action@v2.0.2
+        id: accurics
+        with:
+          app-id: ${{2ad1d78e-ed5e-4b3e-9398-5a0201f5a17a}}
+          env-id: ${{3ee9661e-a339-4b32-b194-92c65ee974ab}}
+          repo: "https://github.com/gagz1984/aws-infra-new"
