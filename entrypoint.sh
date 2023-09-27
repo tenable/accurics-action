@@ -105,7 +105,8 @@ run_accurics() {
   echo "pipeline_mode="$pipeline_mode
   echo "------------------"
   # Run accurics plan
-  accurics $INPUT_RUN_MODE $params $plan_args $pipeline_mode
+  #accurics $INPUT_RUN_MODE $params $plan_args $pipeline_mode
+  accurics $INPUT_RUN_MODE "" "" $pipeline_mode
   
   ACCURICS_PLAN_ERR=$?
 }
