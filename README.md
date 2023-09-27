@@ -50,7 +50,8 @@ The Accurics GitHub action runs as a Linux container, which means it accumulates
 | scan-mode | Allows the Accurics Action to use either terraform or terrascan for scanning(plan/scan) | plan |
 | url | Allows the Accurics Action to point to different target endpoint of the product e.g. https://cloud.tenable.com/cns | https://cloud.tenable.com/cns |
 | pipeline | Allows the Accurics Action to choose mode as pipeline | false |
-
+| run-mode | Allows run terragrunt or terraform (plan/tgplan) | plan |
+| terragrunt-version | Allows install terragrunt DRY Terraform |  |
 
 ### Notes
 - Variable values within the plan-args setting should be stripped of double-quote (") characters
