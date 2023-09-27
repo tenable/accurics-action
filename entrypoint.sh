@@ -89,7 +89,7 @@ run_accurics() {
      runMode="scan"
   else
      echo "running plan mode"
-     accurics init
+     #accurics init
   fi
   
    
@@ -112,6 +112,9 @@ run_accurics() {
   #accurics $INPUT_RUN_MODE $params $plan_args $pipeline_mode
   
   #accurics tgplan
+  echo "processor"
+  cat /proc/cpuinfo
+
   #accurics $INPUT_RUN_MODE $params $plan_args $pipeline_mode
   ACCURICS_PLAN_ERR=$?
 }
