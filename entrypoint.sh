@@ -109,6 +109,7 @@ run_accurics() {
   
   #accurics tgplan
   #accurics $INPUT_RUN_MODE $params $plan_args $pipeline_mode
+  ls /usr/bin/
   
   ACCURICS_PLAN_ERR=$?
 }
