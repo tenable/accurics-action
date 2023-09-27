@@ -1,0 +1,5 @@
+# .github/CODEOWNERS
+# This file designates required PR reviewers for this repository
+# https://help.github.com/articles/about-codeowners/
+
+*       @tenable/terrascan-maintainers

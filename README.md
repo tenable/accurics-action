@@ -3,7 +3,7 @@
 ## Description
 The Accurics GitHub action runs an Accurics scan against the IaC (Infrastructure-as-Code) files found within the applied repository.
 This action can be used to fail a pipeline build when violations or errors are found.
-The scan results can be viewed in the pipeline results or in the Accurics Console itself at https://cloud.tenable.com/cns or https://app.accurics.com
+The scan results can be viewed in the pipeline results or in the Accurics Console itself at https://cloud.tenable.com/cns
  depending on url configured. 
 See examples below.
 
@@ -12,7 +12,7 @@ See examples below.
 ```yaml
     steps:
       - name: Accurics
-        uses: accurics/accurics-action@v1.3.1
+        uses: tenable/accurics-action@v2.0.2
         id: accurics
         with:
           app-id: ${{ secrets.ACCURICS_APP_ID }}
@@ -44,11 +44,11 @@ The Accurics GitHub action runs as a Linux container, which means it accumulates
 | -------------------- | ----------------------------------------------------------- | --------- |
 | terraform-version | The Terraform version used to process the files in this repository | latest | 
 | plan-args | The Terraform version used to process the files in this repository | | 
-| directories | A list of directories to scan within this repository separated by a space | ./ | 
+| directories | A directory to scan within this repository | ./ | 
 | fail-on-violations | Allows the Accurics Action to fail the build when violations are found | true |
 | fail-on-all-errors | Allows the Accurics Action to fail the build when any errors are encountered | true |
 | scan-mode | Allows the Accurics Action to use either terraform or terrascan for scanning(plan/scan) | plan |
-| url | Allows the Accurics Action to point to different target endpoint of the product e.g. https://cloud.tenable.com/cns | https://app.accurics.com |
+| url | Allows the Accurics Action to point to different target endpoint of the product e.g. https://cloud.tenable.com/cns | https://cloud.tenable.com/cns |
 | pipeline | Allows the Accurics Action to choose mode as pipeline | false |
 | run-mode | Allows run terragrunt or terraform (plan/tgplan) | plan |
 | terragrunt-version | Allows install terragrunt DRY Terraform |  |
@@ -80,7 +80,7 @@ This example configures an Accurics Scan with a custom Terraform version and var
       - name: Checkout
         uses: actions/checkout@v2
       - name: Accurics
-        uses: accurics/accurics-action@v1.3.1
+        uses: tenable/accurics-action@v2.0.2
         id: accurics
         env: 
           # Required by Terraform
@@ -106,7 +106,7 @@ This example configures an Accurics Scan using the latest Terraform version, cus
       - name: Checkout
         uses: actions/checkout@v2
       - name: Accurics
-        uses: accurics/accurics-action@v1.3.1
+        uses: tenable/accurics-action@v2.0.2
         id: accurics
         env:
           # Required by Terraform
@@ -135,7 +135,7 @@ This is the same configuration as before, but it now includes an extra build ste
       - name: Checkout
         uses: actions/checkout@v2
       - name: Accurics
-        uses: accurics/accurics-action@v1.3.1
+        uses: tenable/accurics-action@v2.0.2
         id: accurics
         env:
           # Required by Terraform
@@ -195,7 +195,7 @@ This is the same configuration as before, but it now includes an extra build ste
           git branch
       - name: Accurics
         
-        uses: accurics/accurics-action@v2.25
+        uses: tenable/accurics-action@v2.0.2
         id: accurics
         env:
           # Required by Terraform
