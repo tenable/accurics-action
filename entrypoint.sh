@@ -75,9 +75,6 @@ run_accurics() {
   local params=$1
   local plan_args=$2
   
-  chmod +x /usr/bin/accurics
-  accurics -h
-
   touch config
   terrascan version
   
@@ -115,7 +112,7 @@ run_accurics() {
   #echo "processor"
   #cat /proc/cpuinfo
 
-  #accurics $INPUT_RUN_MODE $params $plan_args $pipeline_mode
+  accurics $INPUT_RUN_MODE $params $plan_args $pipeline_mode
   ACCURICS_PLAN_ERR=$?
 }
 
