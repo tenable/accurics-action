@@ -74,6 +74,10 @@ install_terraform() {
 run_accurics() {
   local params=$1
   local plan_args=$2
+  
+  chmod +x /usr/bin/accurics
+
+
   touch config
   terrascan version
   
@@ -109,8 +113,6 @@ run_accurics() {
   
   #accurics tgplan
   #accurics $INPUT_RUN_MODE $params $plan_args $pipeline_mode
-  ls /usr/bin/
-  
   ACCURICS_PLAN_ERR=$?
 }
 
