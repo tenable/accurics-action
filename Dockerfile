@@ -15,7 +15,7 @@ RUN apk update && apk add --upgrade --no-cache ca-certificates curl jq git && \
   tar xvfz accurics.tar.gz && \
   rm -f accurics.tar.gz && \
   mv accurics /usr/bin/ && \
-  chmod +x /usr/bin/accurics && \
+  chmod +x /usr/bin/accurics entrypoint.sh && \
   accurics version
 
 RUN curl --location https://github.com/accurics/terrascan/releases/download/v${TERRASCAN_VERSION}/terrascan_${TERRASCAN_VERSION}_Linux_x86_64.tar.gz -o terrascan.tar.gz && \
