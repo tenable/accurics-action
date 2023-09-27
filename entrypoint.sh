@@ -97,6 +97,13 @@ run_accurics() {
      echo "INPUT_PIPELINE="$INPUT_PIPELINE
   fi
   
+  echo "Details of running"
+  echo "------------------"
+  echo "INPUT_RUN_MOE="$INPUT_RUN_MODE 
+  echo "params="$params 
+  echo "plan_args="$plan_args 
+  echo "pipeline_mode="$pipeline_mode
+  echo "------------------"
   # Run accurics plan
   accurics $INPUT_RUN_MODE $params $plan_args $pipeline_mode
   
