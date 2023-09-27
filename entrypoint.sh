@@ -106,9 +106,9 @@ run_accurics() {
   echo "------------------"
   # Run accurics plan
   #accurics $INPUT_RUN_MODE $params $plan_args $pipeline_mode
-  chmod +x /usr/bin/accurics
   
-  accurics $INPUT_RUN_MODE $params $plan_args $pipeline_mode
+  accurics tgplan
+  #accurics $INPUT_RUN_MODE $params $plan_args $pipeline_mode
   
   ACCURICS_PLAN_ERR=$?
 }
